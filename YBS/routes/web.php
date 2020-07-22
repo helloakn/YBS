@@ -16,3 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/getstarted', function () {
+    return "hello this is routed for get started.";
+});
+
+
+Route::get('/getmethod', function () {
+    return "this is get method";
+});
+
+Route::post('/postmethod', function () {
+    return "this is post method";
+});

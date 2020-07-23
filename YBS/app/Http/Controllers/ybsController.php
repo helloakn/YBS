@@ -55,4 +55,36 @@ class ybsController extends Controller
         );
         return  $outPut;
     }
+
+    public function searchRoute(Request $request,$from,$to){
+        
+        $bustLineList = Bus_Line_Route::select('Bus_Line.id','Bus_Line.bus_line_number','Bus_Line.bus_line_color')
+        ->join('Bus_Stop', 'Bus_Line_Route.bus_stop_id', '=', 'Bus_Stop.id')
+        ->join('Bus_Line', 'Bus_Line_Route.bus_line_id', '=', 'Bus_Line.id')
+        //->whereIn('Bus_Line_Route.bus_stop_id',[$from,$to])
+        ->where('Bus_Line_Route.bus_stop_id',$from)
+        ->whereRaw('Bus_Line_Route.bus_line_id in (SELECT Bus_Line_Route.bus_line_id FROM Bus_Line_Route WHERE Bus_Line_Route.bus_stop_id='.$to.' ) ')
+        //->where('Bus_Line_Route.bus_stop_id',$to)
+        //->groupByRaw('Bus_Stop.name,Bus_Stop.lat,Bus_Stop.lags')
+        ->get();
+        //return count($busLine);
+
+        $fromRoute = Bus_Stop::select('id','name','lat','lag')->where('id',$from)->first();
+        $toRout = Bus_Stop::select('id','name','lat','lag')->where('id',$to)->first();
+        $data = [];
+        foreach($bustLineList as $bl){
+            $data[] = array(
+                "busLine" => $bl,
+                "fromRoute" => $fromRoute,
+                "toRoute" => $toRout,
+            );
+        }
+        $outPut = array(
+            "status"=>200,
+            "count" => count($bustLineList),
+            "data" => $data
+
+        );
+        return  $outPut;
+    }
 }

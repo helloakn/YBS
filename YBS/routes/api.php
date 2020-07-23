@@ -24,5 +24,6 @@ Route::prefix('v1')->group(function () {
     Route::get('buslinelist', "ybsController@busLineList");
     //busLineRouteList
     Route::get('buslineroutelist/{busline}', "ybsController@busLineRouteList")->where('busline', '[0-9]+');
-    Route::get('route/{route}', "ybsController@fromToRoute")->where('route', '[A-Za-z]+');;
+    Route::get('route/{route}', "ybsController@fromToRoute")->where('route', '[A-Za-z]+');
+    Route::get('searchroute/{from}/{to}', "ybsController@searchRoute")->where('from', '[0-9]+')->where('to', '[0-9]+');
 });

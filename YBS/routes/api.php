@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+
+Route::prefix('v1')->group(function () {
+    Route::get('buslinelist', "ybsController@busLineList");
+    //busLineRouteList
+    Route::get('buslineroutelist/{busline}', "ybsController@busLineRouteList")->where('busline', '[0-9]+');;
+});

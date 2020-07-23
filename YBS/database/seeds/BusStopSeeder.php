@@ -3,6 +3,9 @@
 use Illuminate\Database\Seeder;
 
 use App\Models\Township;
+use App\Models\Bus_Line;
+use App\Models\Bus_Line_Route;
+use App\Models\Bus_Line_Stop;
 
 class BusStopSeeder extends Seeder
 {

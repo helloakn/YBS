@@ -23,5 +23,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('v1')->group(function () {
     Route::get('buslinelist', "ybsController@busLineList");
     //busLineRouteList
-    Route::get('buslineroutelist/{busline}', "ybsController@busLineRouteList")->where('busline', '[0-9]+');;
+    Route::get('buslineroutelist/{busline}', "ybsController@busLineRouteList")->where('busline', '[0-9]+');
+    Route::get('route/{route}', "ybsController@fromToRoute")->where('route', '[A-Za-z]+');;
 });

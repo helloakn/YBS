@@ -39,4 +39,20 @@ class ybsController extends Controller
         );
         return  $outPut;
     }
+
+    public function fromToRoute(Request $request,$route){
+        
+        $busStop = Bus_Stop::select('id','name','lat','lag')
+        ->orderBy('lat',$route=='from'?'asc':'desc')
+        ->orderBy('lag',$route=='from'?'asc':'desc')
+        ->get();
+        //return count($busLine);
+        $outPut = array(
+            "status"=>200,
+            "count" => count($busStop),
+            "data" => $busStop
+
+        );
+        return  $outPut;
+    }
 }

@@ -16,8 +16,8 @@ class CreateTownship extends Migration
         Schema::create('Township', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->decimal('lat',16,16);
-            $table->decimal('lag',16,16);
+            $table->decimal('lat',10,7);
+            $table->decimal('lag',10,7);
             $table->timestamps();
             $table->softDeletes('deleted_at', 0);
         });

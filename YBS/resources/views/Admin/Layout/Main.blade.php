@@ -133,13 +133,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
+                <a href="index.php/admix/bus" class="nav-link active">
                   <i class="fas fa-bus text-warning nav-icon"></i>
                   <p>Bus</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="index.php/admix/busline" class="nav-link">
                   <i class="fas fa-bus-alt text-warning nav-icon"></i>
                   <p>Bus Line</p>
                 </a>
@@ -163,7 +163,7 @@
             <ul class="nav nav-treeview">
               
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="index.php/admix/township" class="nav-link">
                   <i class="fas fa-map-marker-alt text-info nav-icon"></i>
                   <p>Township</p>
                 </a>
@@ -182,7 +182,7 @@
             
           </li>
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <a href="index.php/admix/buslineroute" class="nav-link">
               <i class="nav-icon fas  text-success fa-bus-alt"></i>
               <p>
                 Bus Line Route

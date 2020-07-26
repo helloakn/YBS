@@ -1,7 +1,7 @@
 @extends('Admin.Layout.Main')
 
 @section('title')
-Yangon Bus : dashboard
+Yangon Bus : Township
 @endsection
 
 @section('caption')
@@ -9,20 +9,19 @@ Yangon Bus : dashboard
 @endsection
 
 @section('actionButton')
-  <a href="index.php/admix/busstop/setup" class="btn btn-success">Create</a>
+  <a href="index.php/admix/buslineroute/setup" class="btn btn-success">Create</a>
 @endsection
 
 
 
 @section('pagename')
-Bus Stop
+Township
 @endsection
 
 @section('currentRoute')
 <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Location</li>
-              <li class="breadcrumb-item active">BusStop</li>
+              <li class="breadcrumb-item active">Bus Line Route</li>
             </ol>
 @endsection
 
@@ -44,7 +43,7 @@ Bus Stop
           <div class="col-lg-12 col-12 mainContainer">
           <div class="row">
             <div class="col-md6">
-              {{ $busStop->links() }}
+              {{ $result->links() }}
             </div>
             <div class="col-md6  ml-custom-left">
 
@@ -72,10 +71,10 @@ Bus Stop
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Name  </th>
+                  <th scope="col">Bus Line </th>
+                  <th scope="col">Bus Stop </th>
                   <th scope="col">Latitude</th>
-                  <th scope="col">Longitude</th>
-                  <th scope="col">Township</th>
+                  <th scope="col">Logitude</th>
                   <th scope="col">
                     <div class="row">
                       <div class="  ml-custom-left">
@@ -86,18 +85,23 @@ Bus Stop
                 </tr>
               </thead>
               <tbody>
-                @foreach ($busStop as $bstop)
+                @foreach ($result as $row)
                 <tr>
-                  <th scope="row">{{$bstop->id}}</th>
-                  <td><i class="fas fa-map-signs  text-info nav-icon"></i> {{$bstop->name}}</td>
-                  <td><i class="fas fa-map-marker-alt text-info nav-icon"></i> {{$bstop->lat}}</td>
-                  <td><i class="fas fa-map-marker-alt text-info nav-icon"></i> {{$bstop->lag}}</td>
-                  <td>{{$bstop->TownshipName}}</td>
+                  <th scope="row">{{$row->id}}</th>
+                  <td>
+                   {{$row->name}}
+                  </td>
+                  <td>
+                  <i class="fas fa-map-marker-alt text-info nav-icon"></i> {{$row->lat}}
+                  </td>
+                  <td>
+                  <i class="fas fa-map-marker-alt text-info nav-icon"></i> {{$row->lag}}
+                  </td>
                   <td>
                     <div class="row">
                       <div class="  ml-custom-left">
-                      <button type="button" class="btn btn-primary">Edit</button>
-                      <button type="button" class="btn btn-danger">Delete</button>
+                        <a href="index.php/admix/buslineroute/edit/{{$row->id}}" tag="{{$row->id}}" class="btnEdit btn btn-primary">Edit</a>
+                        <a href="#" tag="{{$row->id}}" class="btnDelete btn btn-danger">Delete</a>
                       </div>
                     </div>
                   </td>
@@ -107,7 +111,7 @@ Bus Stop
               </tbody>
             </table>
 
-            {{ $busStop->links() }}
+            {{ $result->links() }}
           </div>
         </div>
           </div>
@@ -119,7 +123,7 @@ Bus Stop
 
 @section('jslink')
 <!-- ChartJS -->
-
+<script src="resources/js/sweetalert2.9.js"></script>
 @endsection
 
 @section('jscode')
@@ -128,6 +132,23 @@ Bus Stop
    $(document).ready(function(){
      $('.fa-search').click(function(){
         $("#frmSearch").submit();
+     });
+
+     $(".btnDelete").click(function(e){
+        e.preventDefault();
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.value) {
+            window.location = "index.php/admix/buslineroute/delete/"+$(this).attr('tag');
+          }
+        });//end sweet alert
      });
    });
 </script>

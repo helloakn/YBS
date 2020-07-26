@@ -8,23 +8,28 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Models\Bus_Stop;
 use App\Models\Bus_Line;
+use App\Models\Bus_Line_Route;
 
-class busLineController extends Controller
+class busLineRouteController extends Controller
 {
     //
    
-    public function busLine(Request $request){
+    public function index(Request $request){
         $search = $request->get('search');
         //dd($search);
-        $busLine = Bus_Line::select('Bus_Line.id','Bus_Line.bus_line_number','Bus_Line.bus_line_color');
+        $objs = Bus_Line_Route::select('Bus_Line_Route.id',
+            'Bus_Line.bus_line_number','Bus_Line.bus_line_color',
+            'Bus_Stop.name','Bus_Stop.lat','Bus_Stop.lag')
+        ->join('Bus_Line','Bus_Line_Route.bus_line_id','=','Bus_Line.id')
+        ->join('Bus_Stop','Bus_Line_Route.bus_stop_id','=','Bus_Stop.id');
         if($search){
-            $busLine = $busLine->where('Bus_Line.bus_line_number','like','%'.$search.'%');
+            $objs = $objs->where('Bus_Line.bus_line_number','like','%'.$search.'%');
         }
-        $busLine = $busLine->orderBy('Bus_Line.id','desc') ->paginate(20);
+        $objs = $objs->orderBy('Bus_Line_Route.id','desc') ->paginate(20);
        // dd($busStop,$busStop->current_page);
-       $data = array('busLine'=>$busLine->appends($request->input()),
+       $data = array('result'=>$objs->appends($request->input()),
        'search'=>$search);
-        return view('Admin.Pages.busLine.listing')->with($data);
+        return view('Admin.Pages.BusLineRoute.listing')->with($data);
     }
     public function buslineSetup(Request $request){
         $search = $request->get('search');
@@ -40,7 +45,7 @@ class busLineController extends Controller
         return view('Admin.Pages.busLine.setup')->with($data);
     }
 
-    public function buslineSetupPost(Request $request){
+    public function buslinerouteInsert(Request $request){
         
 
         $validator = Validator::make($request->all(), [

@@ -27,20 +27,10 @@ class busLineController extends Controller
         return view('Admin.Pages.busLine.listing')->with($data);
     }
     public function buslineSetup(Request $request){
-        $search = $request->get('search');
-        //dd($search);
-        $busLine = Bus_Line::select('Bus_Line.id','Bus_Line.bus_line_number','Bus_Line.bus_line_color');
-        if($search){
-            $busLine = $busLine->where('Bus_Line.bus_line_number','like','%'.$search.'%');
-        }
-        $busLine = $busLine->orderBy('Bus_Line.id','desc') ->paginate(20);
-       // dd($busStop,$busStop->current_page);
-       $data = array('busLine'=>$busLine->appends($request->input()),
-       'search'=>$search);
-        return view('Admin.Pages.busLine.setup')->with($data);
+        return view('Admin.Pages.busLine.setup');
     }
 
-    public function buslineSetupPost(Request $request){
+    public function buslineInsert(Request $request){
         
 
         $validator = Validator::make($request->all(), [
@@ -102,10 +92,7 @@ class busLineController extends Controller
         $busLine = Bus_Line::where('id',$id)->first();
         if($busLine){
             $busLine->delete();
-            return redirect()->route('listingBusLine');
         }
-        else{
-            return redirect()->route('listingBusLine');
-        }
+        return redirect()->route('listingBusLine');
     }
 }

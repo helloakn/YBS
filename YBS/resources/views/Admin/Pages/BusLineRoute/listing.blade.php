@@ -15,7 +15,7 @@ Yangon Bus : Township
 
 
 @section('pagename')
-Township
+Bus Line Route (Bus Stop)
 @endsection
 
 @section('currentRoute')
@@ -89,7 +89,10 @@ Township
                 <tr>
                   <th scope="row">{{$row->id}}</th>
                   <td>
-                   {{$row->name}}
+<label style="color:{{$row->bus_line_color}}"><i class="fas fa-bus-alt nav-icon"></i> {{$row->bus_line_number}}</label>
+                  </td>
+                  <td>
+                  <i class="fas fa-map-signs  text-info nav-icon"></i> {{$row->name}}
                   </td>
                   <td>
                   <i class="fas fa-map-marker-alt text-info nav-icon"></i> {{$row->lat}}

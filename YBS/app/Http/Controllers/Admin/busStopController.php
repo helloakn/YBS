@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Bus_Stop;
 use App\Models\Bus_Line;
 
-class busController extends Controller
+class busStopController extends Controller
 {
     //
-    public function busStop(Request $request){
+    public function index(Request $request){
         $search = $request->get('search');
         //dd($search);
         $busStop = Bus_Stop::select('Bus_Stop.id','Bus_Stop.name','Bus_Stop.lat','Bus_Stop.lag','Township.name as TownshipName')
@@ -27,19 +27,6 @@ class busController extends Controller
         return view('Admin.Pages.BusStop.listing')->with($data);
     }
 
-    public function busLine(Request $request){
-        $search = $request->get('search');
-        //dd($search);
-        $busLine = Bus_Line::select('Bus_Line.id','Bus_Line.bus_line_number','Bus_Line.bus_line_color');
-        if($search){
-            $busLine = $busLine->where('Bus_Line.bus_line_number','like','%'.$search.'%');
-        }
-        $busLine = $busLine->orderBy('Bus_Line.id','desc') ->paginate(20);
-       // dd($busStop,$busStop->current_page);
-       $data = array('busLine'=>$busLine->appends($request->input()),
-       'search'=>$search);
-        return view('Admin.Pages.busLine.listing')->with($data);
-    }
     public function buslineSetup(Request $request){
         $search = $request->get('search');
         //dd($search);

@@ -96,8 +96,8 @@ Bus Stop
                   <td>
                     <div class="row">
                       <div class="  ml-custom-left">
-                      <button type="button" class="btn btn-primary">Edit</button>
-                      <button type="button" class="btn btn-danger">Delete</button>
+                      <a href="index.php/admix/busstop/edit/{{$bstop->id}}" tag="{{$bstop->id}}" class="btnEdit btn btn-primary">Edit</a>
+                        <a href="#" tag="{{$bstop->id}}" class="btnDelete btn btn-danger">Delete</a>
                       </div>
                     </div>
                   </td>

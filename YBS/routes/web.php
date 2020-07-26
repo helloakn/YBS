@@ -25,7 +25,7 @@ Route::namespace('Admin')->prefix('admix')->group(function () {
     Route::get('/dashboard','adminController@home' );
 
     Route::prefix('busstop')->group(function () {
-        Route::get('/','busController@busStop' );
+        Route::get('/','busStopController@index' );
     });
 
     Route::prefix('busline')->group(function () {

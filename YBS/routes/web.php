@@ -25,7 +25,12 @@ Route::namespace('Admin')->prefix('admix')->group(function () {
     Route::get('/dashboard','adminController@home' );
 
     Route::prefix('busstop')->group(function () {
-        Route::get('/','busStopController@index' );
+        Route::get('/','busStopController@index')->name('listingBusstop');;
+        Route::get('/setup','busStopController@busstopSetup' )->name('setupBusStop');
+        Route::post('/setup','busStopController@busstopInsert' );
+        Route::get('/edit/{id}','busStopController@busstopEdit' )->where('id', '[0-9]+');
+        Route::post('/update','busStopController@busstopUpdate' );
+        Route::get('/delete/{id}','busStopController@busstopDelete')->where('id', '[0-9]+');
     });
 
     Route::prefix('busline')->group(function () {

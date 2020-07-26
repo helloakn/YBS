@@ -1,7 +1,7 @@
 @extends('Admin.Layout.Main')
 
 @section('title')
-Yangon Bus : Bus Stop
+Yangon Bus : Bus Line
 @endsection
 
 @section('caption')
@@ -13,15 +13,14 @@ Yangon Bus : Bus Stop
 @endsection
 
 
-
 @section('pagename')
-Bus Stop : <label class="text-success"> Setup</label>
+Bus Stop : <label class="text-success"> Edit</label>
 @endsection
 
 @section('currentRoute')
 <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Location</li>
+              <li class="breadcrumb-item active">Setup</li>
               <li class="breadcrumb-item active">Bus Stop</li>
             </ol>
 @endsection
@@ -53,43 +52,46 @@ Bus Stop : <label class="text-success"> Setup</label>
               </div>
               <div class="col-md-4 " >
               
-                <form method="post">
+                <form method="post" action="index.php/admix/busstop/update">
                 @csrf
+                <input type="hidden"value="{{$obj->id}}" name="busstop_id">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">* Bus Stop Name : </label>
-                    <input type="text" class="form-control" id="name" name="name"  placeholder="Enter Bus Stop Name">
+                    <label for="exampleInputEmail1">* Bus Stop Name :</label>
+
+                    <input type="text" class="form-control" id="name" value="{{$obj->name}}" name="name"  placeholder="Enter Township Name">
                   </div>
-                  @error('name')
+                  @error('bus_line_number')
                       <div class="alert alert-danger">{{ $message }}</div>
                   @enderror
                   <div class="form-group">
                     <label for="exampleInputEmail1">* Latitude :</label>
-                    <input type="text" class="form-control" id="lat" name="lat" placeholder="Enter Latitude">
+                    <input type="text" class="form-control" id="lat" value="{{$obj->lat}}" name="lat" placeholder="Enter Latitude">
                   </div>
                   @error('lat')
-                      <div class="alert alert-danger">The Latitude is required</div>
+                      <div class="alert alert-danger">{{ $message }}</div>
                   @enderror
 
                   <div class="form-group">
                     <label for="exampleInputEmail1">* Longitude :</label>
-                    <input type="text" class="form-control" id="lag" name="lag" placeholder="Enter Longitude">
+                    <input type="text" class="form-control" id="lag" value="{{$obj->lag}}" name="lag" placeholder="Enter Longitude">
                   </div>
-                  @error('lag')
-                      <div class="alert alert-danger">The Longitude is required</div>
+                  @error('lat')
+                      <div class="alert alert-danger">{{ $message }}</div>
                   @enderror
                   <div class="form-group">
                     <label for="exampleInputEmail1">Township (Optional) : </label>
                     <select class="form-control" name="township_id" id="exampleFormControlSelect1">
                     <option value="0">Select Township</option>
                       @foreach ($township as $row)
+                        @if($row->id==$obj->township_id)
+                        <option value="{{$row->id}}" selected>{{$row->name}}</option>
+                        @else
                         <option value="{{$row->id}}">{{$row->name}}</option>
+                        @endif
                       @endforeach
                     </select>
                   </div>
-                  @error('name')
-                      <div class="alert alert-danger">{{ $message }}</div>
-                  @enderror
-                  <button type="submit" class="btn btn-success">Save</button>
+                  <button type="submit" class="btn btn-success">Update</button>
                 </form>  
 
               </div>
@@ -103,17 +105,14 @@ Bus Stop : <label class="text-success"> Setup</label>
 
 
 @section('jslink')
-<!-- ChartJS -->
-<script src="resources/js/Chart.min.js"></script>
+
 @endsection
 
 @section('jscode')
 
 <script>
    $(document).ready(function(){
-     $('.fa-search').click(function(){
-        $("#frmSearch").submit();
-     });
+     
    });
 </script>
 

@@ -89,7 +89,7 @@ Township
                 <tr>
                   <th scope="row">{{$row->id}}</th>
                   <td>
-                   {{$row->name}}
+                  <i class="fas fa-city text-info nav-icon"></i>  {{$row->name}}
                   </td>
                   <td>
                   <i class="fas fa-map-marker-alt text-info nav-icon"></i> {{$row->lat}}
@@ -149,7 +149,7 @@ Township
             window.location = "index.php/admix/township/delete/"+$(this).attr('tag');
           }
         });//end sweet alert
-     });
+     });//end btndelete
    });
 </script>
 

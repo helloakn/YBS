@@ -1,7 +1,7 @@
 @extends('Admin.Layout.Main')
 
 @section('title')
-Yangon Bus : dashboard
+Yangon Bus : Bus Stop
 @endsection
 
 @section('caption')
@@ -92,7 +92,7 @@ Bus Stop
                   <td><i class="fas fa-map-signs  text-info nav-icon"></i> {{$bstop->name}}</td>
                   <td><i class="fas fa-map-marker-alt text-info nav-icon"></i> {{$bstop->lat}}</td>
                   <td><i class="fas fa-map-marker-alt text-info nav-icon"></i> {{$bstop->lag}}</td>
-                  <td>{{$bstop->TownshipName}}</td>
+                  <td><i class="fas fa-city text-info nav-icon"></i> {{$bstop->TownshipName}}</td>
                   <td>
                     <div class="row">
                       <div class="  ml-custom-left">
@@ -118,8 +118,7 @@ Bus Stop
 
 
 @section('jslink')
-<!-- ChartJS -->
-
+<script src="resources/js/sweetalert2.9.js"></script>
 @endsection
 
 @section('jscode')
@@ -129,6 +128,25 @@ Bus Stop
      $('.fa-search').click(function(){
         $("#frmSearch").submit();
      });
+
+     $(".btnDelete").click(function(e){
+        e.preventDefault();
+        //alert($(this).attr('tag'))
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.value) {
+            window.location = "index.php/admix/busstop/delete/"+$(this).attr('tag');
+          }
+        });//end sweet alert
+     });//end btndelete
+
    });
 </script>
 

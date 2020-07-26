@@ -49,6 +49,7 @@
           right:0;
           left:0;
           zIndex:10000;
+          background-color:#1E6CA4;
         }
         .mainHeaderSecond{
           height:70px;
@@ -86,7 +87,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">@yield('caption')</a>
+        <a href="index3.html" class="nav-link">@yield('pagename')</a>
       </li>
     </ul>
 
@@ -164,7 +165,7 @@
               
               <li class="nav-item">
                 <a href="index.php/admix/township" class="nav-link">
-                  <i class="fas fa-map-marker-alt text-info nav-icon"></i>
+                  <i class="fas fa-city text-info nav-icon"></i>
                   <p>Township</p>
                 </a>
               </li>
@@ -251,7 +252,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">@yield('pagename')</h1>
+            <h1 class="m-0 text-dark"></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             @yield('currentRoute')

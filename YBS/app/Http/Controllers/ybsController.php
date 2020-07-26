@@ -14,7 +14,7 @@ class ybsController extends Controller
 {
     //
     public function busLineList(Request $request){
-        $busLine = Bus_Line::select('bus_line_number','bus_line_color')->orderByRaw('LENGTH(bus_line_number) asc')->orderBy('bus_line_number')->get();
+        $busLine = Bus_Line::select('id','bus_line_number','bus_line_color')->orderByRaw('LENGTH(bus_line_number) asc')->orderBy('bus_line_number')->get();
         //return count($busLine);
         $outPut = array(
             "status"=>200,

@@ -18,15 +18,25 @@ Route::get('/', function () {
 });
 
 
-Route::get('/getstarted', function () {
-    return "hello this is routed for get started.";
-});
 
+Route::namespace('Admin')->prefix('admix')->group(function () {
+    // Controllers Within The "App\Http\Controllers\Admin" Namespace
+    Route::get('/','adminController@home' );
+    Route::get('/dashboard','adminController@home' );
 
-Route::get('/getmethod', function () {
-    return "this is get method";
-});
+    Route::prefix('busstop')->group(function () {
+        Route::get('/','busController@busStop' );
+    });
 
-Route::post('/postmethod', function () {
-    return "this is post method";
+    Route::prefix('busline')->group(function () {
+        Route::get('/','busLineController@busline')->name('listingBusLine');
+        Route::get('/setup','busLineController@buslineSetup' )->name('setupBusLine');
+        Route::post('/setup','busLineController@buslineSetupPost' );
+        Route::get('/edit/{id}','busLineController@buslineEdit' )->where('id', '[0-9]+');
+        Route::post('/update','busLineController@buslineUpdate' );
+        Route::get('/delete/{id}','busLineController@buslineDelete')->where('id', '[0-9]+');
+    });
+   
+    
+    Route::get('/township','townshipController@index' );
 });

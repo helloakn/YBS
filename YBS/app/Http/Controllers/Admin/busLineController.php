@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-use App\Models\Bus_Stop;
 use App\Models\Bus_Line;
 
 class busLineController extends Controller

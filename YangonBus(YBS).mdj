@@ -546,7 +546,7 @@
 									"top": 421,
 									"width": 204.80810546875,
 									"height": 13,
-									"text": "BusLine_Route"
+									"text": "Bus_Line_Route"
 								},
 								{
 									"_type": "ERDColumnCompartmentView",
@@ -3429,7 +3429,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFzTCJn2hXOEjg="
 					},
-					"name": "BusLine_Route",
+					"name": "Bus_Line_Route",
 					"ownedElements": [
 						{
 							"_type": "ERDRelationship",

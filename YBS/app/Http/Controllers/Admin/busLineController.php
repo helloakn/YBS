@@ -23,10 +23,10 @@ class busLineController extends Controller
        // dd($busStop,$busStop->current_page);
        $data = array('busLine'=>$busLine->appends($request->input()),
        'search'=>$search);
-        return view('Admin.Pages.busLine.listing')->with($data);
+        return view('Admin.Pages.BusLine.listing')->with($data);
     }
     public function buslineSetup(Request $request){
-        return view('Admin.Pages.busLine.setup');
+        return view('Admin.Pages.BusLine.setup');
     }
 
     public function buslineInsert(Request $request){
@@ -80,7 +80,7 @@ class busLineController extends Controller
         $busLine = Bus_Line::where('id',$id)->first();
         if($busLine){
             $data = array('busLine'=>$busLine);
-             return view('Admin.Pages.busLine.edit')->with($data);
+             return view('Admin.Pages.BusLine.edit')->with($data);
         }
         else{
             return redirect()->route('listingBusLine');

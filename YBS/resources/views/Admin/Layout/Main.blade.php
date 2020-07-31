@@ -6,7 +6,7 @@
   <title>Yangon Bus</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <base href="http://18.140.249.241/">
+  <base href="{{URL::to('/')}}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="resources/css/fontawesome.all.min.css">
   <!-- Ionicons -->

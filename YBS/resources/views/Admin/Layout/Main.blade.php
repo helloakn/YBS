@@ -236,6 +236,15 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="index.php/admix/buslineroute" class="nav-link">
+              <i class="nav-icon text-danger fas fa-sign-out-alt"></i>
+              <p class="text-danger">
+                LogOut
+              </p>
+            </a>
+          </li>
           
         </ul>
       </nav>

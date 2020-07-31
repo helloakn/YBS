@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Log in</title>
+  <title>YBS | Log in</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="{{URL::to('/')}}">
   <!-- Font Awesome -->

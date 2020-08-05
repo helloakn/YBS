@@ -9,7 +9,7 @@ Yangon Bus : Township
 @endsection
 
 @section('actionButton')
-  <a href="index.php/admix/buslineroute/setup" class="btn btn-success">Create</a>
+  
 @endsection
 
 

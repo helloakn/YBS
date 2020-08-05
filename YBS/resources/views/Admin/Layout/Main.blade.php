@@ -112,10 +112,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="https://avatars0.githubusercontent.com/u/16041510?s=460&u=509c12fa72908487391932c0592d62d45ce21342&v=4" class="img-circle elevation-2" alt="User Image">
+          <img src="https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Aung Kyaw Nyunt</a>
+          <a href="#" class="d-block">Administrator</a>
         </div>
       </div>
 
@@ -133,12 +133,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="index.php/admix/bus" class="nav-link active">
-                  <i class="fas fa-bus text-warning nav-icon"></i>
-                  <p>Bus</p>
-                </a>
-              </li>
+              
               <li class="nav-item">
                 <a href="index.php/admix/busline" class="nav-link">
                   <i class="fas fa-bus-alt text-warning nav-icon"></i>
@@ -191,51 +186,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy" style="color:white;"></i>
-              <p>
-                Report
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">2</span>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation + Sidebar</p>
-                </a>
-              </li>
-            </ul>
-          </li>
           
-          
-          
-          <li class="nav-header">Participants</li>
-          <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
-              <i class="nav-icon fas fa-user-shield"></i>
-              <p>
-                Administrator
-                <span class="badge badge-info right">2</span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="pages/gallery.html" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                Users
-              </p>
-            </a>
-          </li>
 
           <li class="nav-item">
             <a href="index.php/admix/logout" class="nav-link">

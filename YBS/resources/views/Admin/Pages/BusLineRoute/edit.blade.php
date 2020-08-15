@@ -20,8 +20,8 @@ Township : <label class="text-success"> Edit</label>
 @section('currentRoute')
 <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Setup</li>
-              <li class="breadcrumb-item active">Township</li>
+              <li class="breadcrumb-item active">Bus Line Route</li>
+              <li class="breadcrumb-item active">Edit</li>
             </ol>
 @endsection
 
@@ -52,28 +52,42 @@ Township : <label class="text-success"> Edit</label>
               </div>
               <div class="col-md-4 " >
               
-                <form method="post" action="index.php/admix/township/update">
+                <form method="post" action="index.php/admix/buslineroute/update">
                 @csrf
-                <input type="hidden"value="{{$obj->id}}" name="township_id">
+                <input type="hidden"value="{{$busLineRoute->id}}" name="buslineroute_id">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">* Township Name :</label>
+                    <label for="exampleInputEmail1">* Bus Line:</label>
 
-                    <input type="text" class="form-control" id="name" value="{{$obj->name}}" name="name"  placeholder="Enter Township Name">
+                    <select class="form-control" name="busLine_id" id="exampleFormControlSelect1">
+                    <option value="0">Select Bus Line</option>
+                      @foreach ($busLine as $row)
+                        <option value="{{$row->id}}" {{ ($busLineRoute->bus_line_id==$row->id?"selected":"") }}>{{$row->bus_line_number}} ( {{$row->bus_line_color}} )</option>
+                      @endforeach
+                    </select>
                   </div>
-                  @error('bus_line_number')
+                  @error('busLine_id')
                       <div class="alert alert-danger">{{ $message }}</div>
                   @enderror
                   <div class="form-group">
-                    <label for="exampleInputEmail1">* Latitude :</label>
-                    <input type="text" class="form-control" id="lat" value="{{$obj->lat}}" name="lat" placeholder="Enter Latitude">
+                    <label for="exampleInputEmail1">* Bus Stop :</label>
+                    <select class="form-control" name="busStop_id" id="exampleFormControlSelect1">
+                    <option value="0">Select Bus Stop</option>
+                      @foreach ($busStop as $row)
+                        <option value="{{$row->id}}" {{ ($busLineRoute->bus_stop_id==$row->id?"selected":"") }}>{{$row->name}} </option>
+                      @endforeach
+                    </select>
                   </div>
                   @error('lat')
                       <div class="alert alert-danger">{{ $message }}</div>
                   @enderror
 
                   <div class="form-group">
-                    <label for="exampleInputEmail1">* Longitude :</label>
-                    <input type="text" class="form-control" id="lag" value="{{$obj->lag}}" name="lag" placeholder="Enter Longitude">
+                    <label for="exampleInputEmail1">* Route Type:</label>
+                    <select class="form-control" name="routeType" id="exampleFormControlSelect1">
+                    <option value="0" {{ ($busLineRoute->type==0?"selected":"") }}>Start Route</option>
+                    <option value="1" {{ ($busLineRoute->type==1?"selected":"") }}>Middle Route</option>
+                    <option value="2" {{ ($busLineRoute->type==2?"selected":"" )}} >End Route</option>
+                    </select>
                   </div>
                   @error('lat')
                       <div class="alert alert-danger">{{ $message }}</div>

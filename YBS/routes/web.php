@@ -63,11 +63,11 @@ Route::namespace('Admin')->prefix('admix')->group(function () {
 
         Route::prefix('buslineroute')->group(function () {
             Route::get('/','busLineRouteController@index')->name('listingBusLineRoute');
-            //Route::get('/setup','busLineRouteController@townshipSetup' )->name('setupTownship');
-            //Route::post('/setup','busLineRouteController@townshipInsert' );
-            //Route::get('/edit/{id}','busLineRouteController@townshipEdit' )->where('id', '[0-9]+');
-            //Route::post('/update','busLineRouteController@townshipUpdate' );
-        // Route::get('/delete/{id}','busLineRouteController@townshipDelete')->where('id', '[0-9]+');
+            Route::get('/setup','busLineRouteController@Setup' )->name('setupBusLineRoute');
+            Route::post('/setup','busLineRouteController@Insert' );
+            Route::get('/edit/{id}','busLineRouteController@Edit' )->where('id', '[0-9]+');
+            Route::post('/update','busLineRouteController@Update' );
+            Route::get('/delete/{id}','busLineRouteController@Delete')->where('id', '[0-9]+');
         });
 
     });

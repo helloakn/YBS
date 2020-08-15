@@ -31,26 +31,28 @@ class busLineRouteController extends Controller
        'search'=>$search);
         return view('Admin.Pages.BusLineRoute.listing')->with($data);
     }
-    public function buslineSetup(Request $request){
+    public function Setup(Request $request){
         $search = $request->get('search');
         //dd($search);
-        $busLine = Bus_Line::select('Bus_Line.id','Bus_Line.bus_line_number','Bus_Line.bus_line_color');
-        if($search){
-            $busLine = $busLine->where('Bus_Line.bus_line_number','like','%'.$search.'%');
-        }
-        $busLine = $busLine->orderBy('Bus_Line.id','desc') ->paginate(20);
+        $busLine = Bus_Line::select('Bus_Line.id','Bus_Line.bus_line_number','Bus_Line.bus_line_color')
+                    ->orderBy('Bus_Line.bus_line_number') ->get();
+        $busStop = Bus_Stop::select('id','name')
+                    ->orderBy('id','desc') ->get();           
        // dd($busStop,$busStop->current_page);
-       $data = array('busLine'=>$busLine->appends($request->input()),
-       'search'=>$search);
-        return view('Admin.Pages.busLine.setup')->with($data);
+       $data = array(
+           'busLine'=>$busLine,
+            'busStop'=>$busStop
+        );
+        return view('Admin.Pages.BusLineRoute.setup')->with($data);
     }
 
-    public function buslinerouteInsert(Request $request){
+    public function Insert(Request $request){
         
 
         $validator = Validator::make($request->all(), [
-            'bus_line_number' => 'required|unique:Bus_Line|max:255',
-            'bus_line_color' => 'required',
+            'busLine_id' => 'required',
+            'busStop_id' => 'required',
+            'routeType' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -60,21 +62,34 @@ class busLineRouteController extends Controller
                         ->withInput();
         }
         else{
-            $busLine = new Bus_Line();
-            $busLine->bus_line_number = $request->get('bus_line_number');
-            $busLine->bus_line_color = $request->get('bus_line_color');
-            $busLine->save();
-            return redirect()->route('listingBusLine');
+            $busLineRoute = Bus_Line_Route::where('bus_line_id',$request->get('busLine_id'))
+                            ->where('bus_stop_id',$request->get('busStop_id'))->first();
+            if($busLineRoute)
+            {
+                return redirect()->route('listingBusLineRoute');
+            }
+            else{
+                $busLineRoute = new Bus_Line_Route();
+                $busLineRoute->bus_line_id = $request->get('busLine_id');
+                $busLineRoute->bus_stop_id = $request->get('busStop_id');
+                $busLineRoute->type = $request->get('routeType');
+                $busLineRoute->quee_no = 0;
+                $busLineRoute->save();
+                return redirect()->route('listingBusLineRoute');
+            }
+            
         }
         
     }
 
-    public function buslineUpdate(Request $request){
-        $id = $request->get('bus_line_id');
-        $busLine = Bus_Line::where('id',$id)->first();
-        if($busLine){
+    public function Update(Request $request){
+        $id = $request->get('buslineroute_id');
+        $busLineRoute = Bus_Line_Route::where('id',$id)->first();
+        if($busLineRoute){
             $validator = Validator::make($request->all(), [
-                'bus_line_color' => 'required',
+                'busLine_id' => 'required',
+                'busStop_id' => 'required',
+                'routeType' => 'required',
             ]);
             if ($validator->fails()) {
                 // return "fucking failed";
@@ -83,34 +98,45 @@ class busLineRouteController extends Controller
                              ->withInput();
              }
              else{
-                $busLine->bus_line_color = $request->get('bus_line_color');
-                $busLine->save();
-                return redirect()->route('listingBusLine');
+                $busLineRoute->bus_line_id = $request->get('busLine_id');
+                $busLineRoute->bus_stop_id = $request->get('busStop_id');
+                $busLineRoute->type = $request->get('routeType');
+                $busLineRoute->save();
+                return redirect()->route('listingBusLineRoute');
             }
         }
         else{
-            return redirect()->route('listingBusLine');
+            return redirect()->route('listingBusLineRoute');
         }
     }
-    public function buslineEdit(Request $request,$id){
-        $busLine = Bus_Line::where('id',$id)->first();
-        if($busLine){
-            $data = array('busLine'=>$busLine);
-             return view('Admin.Pages.busLine.edit')->with($data);
+    public function Edit(Request $request,$id){
+        $busLineRoute = Bus_Line_Route::where('id',$id)->first();
+        if($busLineRoute){
+
+            $busLine = Bus_Line::select('Bus_Line.id','Bus_Line.bus_line_number','Bus_Line.bus_line_color')
+                    ->orderBy('Bus_Line.bus_line_number') ->get();
+            $busStop = Bus_Stop::select('id','name')
+                    ->orderBy('id','desc') ->get(); 
+
+            $data = array('busLineRoute'=>$busLineRoute,
+            'busLine'=>$busLine,
+            'busStop'=>$busStop,
+        );
+             return view('Admin.Pages.BusLineRoute.edit')->with($data);
         }
         else{
-            return redirect()->route('listingBusLine');
+            return redirect()->route('listingBusLineRoute');
         }
     }
 
-    public function buslineDelete(Request $request,$id){
-        $busLine = Bus_Line::where('id',$id)->first();
-        if($busLine){
-            $busLine->delete();
-            return redirect()->route('listingBusLine');
+    public function Delete(Request $request,$id){
+        $busLineRoute = Bus_Line_Route::where('id',$id)->first();
+        if($busLineRoute){
+            $busLineRoute->delete();
+            return redirect()->route('listingBusLineRoute');
         }
         else{
-            return redirect()->route('listingBusLine');
+            return redirect()->route('listingBusLineRoute');
         }
     }
 }

@@ -21,8 +21,8 @@ Township : <label class="text-success"> Setup</label>
 @section('currentRoute')
 <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Location</li>
-              <li class="breadcrumb-item active">Township</li>
+              <li class="breadcrumb-item active">Bus Line Route</li>
+              <li class="breadcrumb-item active">Setup</li>
             </ol>
 @endsection
 
@@ -56,23 +56,39 @@ Township : <label class="text-success"> Setup</label>
                 <form method="post">
                 @csrf
                   <div class="form-group">
-                    <label for="exampleInputEmail1">* Township Name : </label>
-                    <input type="text" class="form-control" id="name" name="name"  placeholder="Enter Township Name">
+                    <label for="exampleInputEmail1">* Bus Line : </label>
+                    <select class="form-control" name="busLine_id" id="exampleFormControlSelect1">
+                    <option value="0">Select Bus Line</option>
+                      @foreach ($busLine as $row)
+                        <option value="{{$row->id}}">{{$row->bus_line_number}} ( {{$row->bus_line_color}} )</option>
+                      @endforeach
+                    </select>
                   </div>
                   @error('name')
                       <div class="alert alert-danger">{{ $message }}</div>
                   @enderror
+                  
+
                   <div class="form-group">
-                    <label for="exampleInputEmail1">* Latitude :</label>
-                    <input type="text" class="form-control" id="lat" name="lat" placeholder="Enter Latitude">
+                    <label for="exampleInputEmail1">* Bus Stop: </label>
+                    <select class="form-control" name="busStop_id" id="exampleFormControlSelect1">
+                    <option value="0">Select BusStop</option>
+                      @foreach ($busStop as $row)
+                        <option value="{{$row->id}}">{{$row->name}}</option>
+                      @endforeach
+                    </select>
                   </div>
-                  @error('lat')
-                      <div class="alert alert-danger">The Latitude is required</div>
+                  @error('lag')
+                      <div class="alert alert-danger">The Longitude is required</div>
                   @enderror
 
                   <div class="form-group">
-                    <label for="exampleInputEmail1">* Longitude :</label>
-                    <input type="text" class="form-control" id="lag" name="lag" placeholder="Enter Longitude">
+                    <label for="exampleInputEmail1">* Route Type: </label>
+                    <select class="form-control" name="routeType" id="exampleFormControlSelect1">
+                    <option value="0">Start Route</option>
+                    <option value="1">Middle Route</option>
+                    <option value="2">End Route</option>
+                    </select>
                   </div>
                   @error('lag')
                       <div class="alert alert-danger">The Longitude is required</div>
